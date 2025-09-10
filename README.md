@@ -2,7 +2,7 @@
 
 # 🎓 CS50P Capstone: YouTube Video Transcript API
 
-This project is a FastAPI-based web service for serving transcripts, playlists, and video metadata from CS50 YouTube videos. It is designed as a capstone project for CS50P.
+This project is a FastAPI-based API for returning transcripts, playlists, and video metadata from a database that contains transcripts of videos in CS50 youtube channel. It is designed as a capstone project for CS50P.
 
 ## ✨ Features
 
@@ -24,9 +24,9 @@ This project is a FastAPI-based web service for serving transcripts, playlists, 
 
 ### 🗂️ Data Model
 
-- **Playlist**: Stores playlist ID and name
-- **Videos**: Stores video ID, title, URL, transcript status, and links to transcripts
-- **Transcripts**: Stores transcript text, start time, and links to videos
+- **Playlist**: includes playlist ID and name
+- **Videos**: includes video ID, title, URL, transcript status, and links to transcripts
+- **Transcripts**: includes transcript text, start time, and links to videos
 
 ## 🚀 Getting Started
 
@@ -40,7 +40,8 @@ This project is a FastAPI-based web service for serving transcripts, playlists, 
 	 python project.py
 	 ```
 4. 🌐 **Access the API:**
-	 [http://127.0.0.1:8000/api](http://127.0.0.1:8000/api)
+	 http://127.0.0.1:8000/api - use Postman or web Browser
+     Web browser recommended for this specific endpoint to view the documentation
 
 ## 🧪 Testing
 
