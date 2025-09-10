@@ -40,3 +40,7 @@ class VideoRead(SQLModel):
     video_id : str
     title : str
     url : str
+
+class TranscriptRead(SQLModel):
+    start_time : float
+    text : str
