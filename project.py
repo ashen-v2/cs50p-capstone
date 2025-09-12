@@ -36,13 +36,15 @@ HTML_DOC = """
     <div class="endpoint">
         <b>Playlists:</b><br>
         <code>GET /api/playlists</code><br>
-        Returns a list of all playlists.
+        Returns a list of all playlists. limit 50.\n
+        adjust <code>?skip=0&limit=50</code> to adjust output 
     </div>
 
     <div class="endpoint">
         <b>Videos:</b><br>
         <code>GET /api/videos</code><br>
-        Returns a list of all videos (id + name).
+        Returns a list of all videos (id + name). limit 100.\n
+        adjust <code>?skip=0&limit=100</code> to adjust output 
     </div>
 
     <div class="endpoint">
@@ -65,13 +67,13 @@ HTML_DOC = """
 """
 
 
-def get_playlists(session : SessionDep) -> list:
+def get_playlists(session : SessionDep, skip : int, limit : int) -> list:
     
-    playlists : list = session.exec(select(Playlist)).all()
+    playlists : list = session.exec(select(Playlist).limit(limit).offset(skip)).all()
     return playlists
 
-def get_videos(session : SessionDep):
-        videos : list = session.exec(select(Videos)).all()
+def get_videos(session : SessionDep, skip : int, limit : int):
+        videos : list = session.exec(select(Videos).limit(limit).offset(skip)).all()
         return videos
 
 def get_transcripts(videoid : str, session : SessionDep):
@@ -104,14 +106,14 @@ def create_app():
     
     # returns list of playlists
     @app.get("/api/playlists", response_model=list[PlaylistRead],  status_code=HTTPStatus.OK)
-    def playlists(session : SessionDep) -> list:
-        return get_playlists(session)
+    def playlists(session : SessionDep, skip : int = 0, limit : int = 50) -> list:
+        return get_playlists(session, skip, limit)
         
 
     # returns video name and id
     @app.get("/api/videos", response_model=list[VideoRead],  status_code=HTTPStatus.OK)
-    def videos(session : SessionDep):
-        return get_videos(session)
+    def videos(session : SessionDep, skip : int = 0, limit : int = 100):
+        return get_videos(session, skip, limit)
 
     # returns full transcripts
     @app.get("/api/videos/{videoid}", response_model=list[TranscriptRead], status_code=HTTPStatus.OK)

@@ -7,8 +7,8 @@ This project is a FastAPI-based API for returning transcripts, playlists, and vi
 ## ✨ Features
 
 - **REST API Endpoints**:
-	- 📋 List all playlists (`/api/playlists`)
-	- 🎬 List all videos (`/api/videos`)
+		- 📋 List all playlists (`/api/playlists`) with pagination: `?skip=0&limit=50`
+		- 🎬 List all videos (`/api/videos`) with pagination: `?skip=0&limit=100`
 	- 📝 Fetch transcripts by video ID (`/api/videos/{videoid}`)
 	- 📝 Fetch transcripts by video title (`/api/videotitle/{videotitle}`)
 - **HTML Documentation** at `/api` root endpoint
@@ -41,17 +41,23 @@ This project is a FastAPI-based API for returning transcripts, playlists, and vi
 	 ```
 4. 🌐 **Access the API:**
 	 http://127.0.0.1:8000/api - use Postman or web Browser
-     Web browser recommended for this specific endpoint to view the documentation
+     (Web browser recommended for this specific endpoint to view the documentation)
 
 ## 🧪 Testing
 
 - Run tests with pytest or your preferred test runner. Example test file: `test_project.py`.
+- tests has written with pytest in mind
+
 
 ## 📚 Usage Example
 
-- To get all playlists:
+- To get all playlists (default limit 50, use skip/limit for pagination):
 	```
-	GET /api/playlists
+	GET /api/playlists?skip=0&limit=20
+	```
+- To get all videos (default limit 100, use skip/limit for pagination):
+	```
+	GET /api/videos?skip=0&limit=20
 	```
 - To get transcripts for a video by ID:
 	```
