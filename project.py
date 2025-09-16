@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi import HTTPException
 from fastapi.responses import HTMLResponse
 from http import HTTPStatus
-from dbmodels import Playlist, PlaylistRead, Videos, VideoRead, TranscriptRead
+from dbmodels import Playlist, PlaylistRead, Videos, VideoRead, TranscriptRead, Transcripts
 from database import SessionDep, create_db_and_tables
 from sqlmodel import select
 
@@ -82,7 +82,9 @@ def get_transcripts(videoid : str, session : SessionDep):
 
     if video == None:
         raise(HTTPException(status_code=404, detail="Invalid Video id"))
-    transcripts = video.transcript
+    # transcripts = video.transcript
+    transcripts = session.exec(select(Transcripts).where(Transcripts.video_id == videoid)).all()
+    print(f"t{transcripts}")
     return transcripts
 
 def get_transcripts_byname(videotitle : str, session : SessionDep):
@@ -90,7 +92,9 @@ def get_transcripts_byname(videotitle : str, session : SessionDep):
 
     if video == None:
         raise(HTTPException(status_code=404, detail="Invalid Video title"))
-    transcripts = video.transcript
+    videoid = Videos.video_id
+    # transcripts = video.transcript
+    transcripts = session.exec(select(Transcripts).where(Transcripts.video_id == videoid)).all()
     return transcripts
 
 

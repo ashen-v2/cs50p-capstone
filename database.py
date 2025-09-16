@@ -2,7 +2,7 @@ from typing import Annotated
 from fastapi import Depends
 from sqlmodel import Session, create_engine, SQLModel
 
-sqliteurl = "sqlite:///db.sqlite3"
+sqliteurl = "sqlite:///db_example.sqlite3"
 connect_args = {"check_same_thread" : False}
 engine = create_engine(sqliteurl, connect_args=connect_args)
 
