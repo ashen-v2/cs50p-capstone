@@ -77,14 +77,12 @@ def get_videos(session : SessionDep, skip : int, limit : int):
         return videos
 
 def get_transcripts(videoid : str, session : SessionDep):
-    print(videoid)
     video = session.exec(select(Videos).where(Videos.video_id == videoid)).first()
 
     if video == None:
         raise(HTTPException(status_code=404, detail="Invalid Video id"))
     # transcripts = video.transcript
     transcripts = session.exec(select(Transcripts).where(Transcripts.video_id == videoid)).all()
-    print(f"t{transcripts}")
     return transcripts
 
 def get_transcripts_byname(videotitle : str, session : SessionDep):
